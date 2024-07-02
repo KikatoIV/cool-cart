@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CartContainer = styled.div`
-  background-color: #f9f9f9;
+  background-color: #ECECEC;
   color: #333333; 
   border: 1px solid #ddd; 
   padding: 1rem;
