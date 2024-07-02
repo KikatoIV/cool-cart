@@ -9,13 +9,14 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [cart, setCart] = useState<ProductItem[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch("https://dummyjson.com/products");
         const data = await response.json();
-        setProducts((prevProducts) => {
+        setProducts(() => {
           const products = data.products.map((product: ProductItem) => ({
             ...product,
             quantity: 0,
