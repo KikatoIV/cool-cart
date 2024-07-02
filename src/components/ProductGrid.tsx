@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from "react";
 import { ProductItem } from "../types/productItem";
+import { GridContainer } from "../styles/productGridStyles";
 import Product from "./Product";
 
 interface ProductGridProps {
@@ -8,21 +8,32 @@ interface ProductGridProps {
   onAddToCart: (product: ProductItem) => void;
 }
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 2fr;
-  gap: 1rem;
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
-
 const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const scrollPosition = useRef<number>(0);
+
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollTop = scrollPosition.current;
+    }
+  }, [products]);
+
+  const handleAddToCart = (product: ProductItem) => {
+    console.log(gridRef.current)
+    if (gridRef.current) {
+      scrollPosition.current = gridRef.current.scrollTop;
+    }
+    onAddToCart(product);
+  };
+
   return (
-    <GridContainer>
+    <GridContainer ref={gridRef}>
       {products.map((product) => (
-        <Product key={product.id} product={product} onAddToCart={onAddToCart} />
+        <Product
+          key={product.id}
+          product={product}
+          onAddToCart={() => handleAddToCart(product)}
+        />
       ))}
     </GridContainer>
   );

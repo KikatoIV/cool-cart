@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { ProductItem } from "../types/productItem";
+import { CartContainer, CartTitle, EmptyCartMessage, CartItem, TotalPrice } from "src/styles/cartStyles";
 
 interface CartProps {
   cart: ProductItem[];
@@ -8,63 +8,11 @@ interface CartProps {
   onRemove: (product: ProductItem) => void;
 }
 
-const CartContainer = styled.div`
-  background-color: ${({ theme }) => theme.body};
-  color: ${({ theme }) => theme.text};
-  border: 1px solid ${({ theme }) => theme.background};
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-`;
-
-const CartTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
-
-const EmptyCartMessage = styled.p`
-  margin-bottom: 1rem;
-`;
-
-const CartItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-
-  img {
-    width: 3rem;
-    height: 3rem;
-    margin-right: 1rem;
-    border-radius: 0.25rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-  }
-
-  button {
-    background-color: #e53e3e;
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-  }
-
-  span {
-    margin: 0 0.5rem;
-  }
-`;
-
-const TotalPrice = styled.p`
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-top: 1rem;
-`;
-
 const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
   return (
     <CartContainer>
@@ -76,9 +24,13 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
           <CartItem key={product.id}>
             <img src={product.thumbnail} alt={product.title} />
             <h3>{product.title}</h3>
+            <h4>
+              Price of all {product.title}'s is {" "}
+              {( product.price * product.quantity).toFixed(2)}
+            </h4>
             <div>
               <button onClick={() => onRemove(product)}>-</button>
-              <span>{product.price.toFixed(2)}</span>
+              <span>{product.quantity}</span>
               <button onClick={() => onAdd(product)}>+</button>
             </div>
           </CartItem>

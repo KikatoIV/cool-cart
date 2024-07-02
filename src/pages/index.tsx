@@ -4,20 +4,8 @@ import { ProductItem } from "../types/productItem";
 import ProductGrid from "../components/ProductGrid";
 import Cart from "../components/Cart";
 import ThemeToggle from "../components/ThemeToggle";
-import styled from "styled-components";
 import { useTheme } from "../contexts/ThemeContext";
-
-const Container = styled.div`
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 1rem;
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
+import { Container, Title } from "src/styles/indexStyles";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
@@ -27,15 +15,36 @@ const Home: React.FC = () => {
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data.products));
+      .then((data) => {
+        const productsWithQuantity = data.products.map((product: ProductItem) => ({
+          ...product,
+          quantity: 0,
+        }));
+        setProducts(productsWithQuantity);
+      });
   }, []);
 
   const addToCart = (product: ProductItem) => {
-    setCart([...cart, product]);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const removeFromCart = (product: ProductItem) => {
-    setCart(cart.filter((item) => item.id !== product.id));
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
   };
 
   return (
@@ -43,18 +52,9 @@ const Home: React.FC = () => {
       <Title>Products</Title>
       <ThemeToggle />
       <ProductGrid products={products} onAddToCart={addToCart} />
-      <CartContainer>
         <Cart cart={cart} onAdd={addToCart} onRemove={removeFromCart} />
-      </CartContainer>
     </Container>
   );
 };
-
-const CartContainer = styled.div`
-  margin-top: 2rem;
-  background-color: ${({ theme }) => theme.background};
-  padding: 1rem;
-  border-radius: 0.5rem;
-`;
 
 export default Home;
