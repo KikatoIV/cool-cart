@@ -37,7 +37,7 @@ Cool Cart is a modern e-commerce application built with React, Styled Components
 1. Clone the repository:
 
    ```
-   git clone https://github.com/yourusername/cool-cart.git
+   git clone https://github.com/KikatoIV/cool-cart.git
    cd cool-cart
    ```
 
