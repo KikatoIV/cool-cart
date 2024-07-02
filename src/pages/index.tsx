@@ -10,17 +10,16 @@ import { Container, Title } from "src/styles/indexStyles";
 const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [cart, setCart] = useState<ProductItem[]>([]);
-  const { theme } = useTheme();
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((data) => {
-        const productsWithQuantity = data.products.map((product: ProductItem) => ({
+        const products = data.products.map((product: ProductItem) => ({
           ...product,
           quantity: 0,
         }));
-        setProducts(productsWithQuantity);
+        setProducts(products);
       });
   }, []);
 
