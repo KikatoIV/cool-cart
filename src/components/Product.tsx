@@ -12,7 +12,7 @@ const Product: React.FC<ProductProps> = ({ product, onAddToCart }) => {
     <ProductContainer>
       <ProductImage src={product.thumbnail} alt={product.title} />
       <ProductTitle>{product.title}</ProductTitle>
-      <ProductPrice>{product.price}</ProductPrice>
+      <ProductPrice>For just £{product.price}</ProductPrice>
       <AddToCartButton onClick={() => onAddToCart(product)}>
         Add to Cart
       </AddToCartButton>

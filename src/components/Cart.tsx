@@ -1,6 +1,13 @@
 import React from "react";
 import { ProductItem } from "../types/productItem";
-import { CartContainer, CartTitle, EmptyCartMessage, CartItem, TotalPrice } from "src/styles/cartStyles";
+import {
+  CartContainer,
+  CartTitle,
+  EmptyCartMessage,
+  CartItem,
+  TotalPrice,
+  QuantityControl,
+} from "src/styles/cartStyles";
 
 interface CartProps {
   cart: ProductItem[];
@@ -24,15 +31,12 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
           <CartItem key={product.id}>
             <img src={product.thumbnail} alt={product.title} />
             <h3>{product.title}</h3>
-            <h4>
-              Sub total {" "}
-              {( product.price * product.quantity).toFixed(2)}
-            </h4>
-            <div>
+            <QuantityControl>
+              <h4>Sub total {(product.price * product.quantity).toFixed(2)}</h4>
               <button onClick={() => onRemove(product)}>-</button>
               <span>{product.quantity}</span>
               <button onClick={() => onAdd(product)}>+</button>
-            </div>
+            </QuantityControl>
           </CartItem>
         ))
       )}

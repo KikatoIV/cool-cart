@@ -25,24 +25,31 @@ export const CartItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   img {
-    width: 3rem;
-    height: 3rem;
-    margin-right: 1rem;
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem; 
     border-radius: 0.25rem;
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: #333333;
+    margin: 0;
   }
 
-  p {
-    font-size: 1rem;
+  h4 {
+    font-size: 1.25rem;
     color: #666666;
+    margin-right: 5rem;
   }
+`;
+
+export const QuantityControl = styled.div`
+  display: flex;
+  align-items: center;
 
   button {
     background-color: #B18C5D;
@@ -50,11 +57,16 @@ export const CartItem = styled.div`
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     cursor: pointer;
+    margin-right: 0.5rem;
   }
 
   span {
-    margin: 0 0.5rem;
+    font-size: 1rem;
     color: #333333;
+    padding: 0.5rem;
+    marginRight: 10px
+    min-width: 2rem;
+    text-align: center;
   }
 `;
 
