@@ -47,12 +47,13 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Title>Products</Title>
-      <ThemeToggle />
-      <ProductGrid products={products} onAddToCart={addToCart} />
+    <>
+      <Title>Cool Cart!!</Title>
+      <Container>
+        <ProductGrid products={products} onAddToCart={addToCart} />
         <Cart cart={cart} onAdd={addToCart} onRemove={removeFromCart} />
-    </Container>
+      </Container>
+    </>
   );
 };
 

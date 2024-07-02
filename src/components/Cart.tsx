@@ -25,7 +25,7 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
             <img src={product.thumbnail} alt={product.title} />
             <h3>{product.title}</h3>
             <h4>
-              Price of all {product.title}'s is {" "}
+              Sub total {" "}
               {( product.price * product.quantity).toFixed(2)}
             </h4>
             <div>

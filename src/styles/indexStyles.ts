@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #E7A66EC7;
-  max-width: 1200px;
+  max-width: auto-fit;
   margin: 0 auto;
   padding: 1rem;
 `;
