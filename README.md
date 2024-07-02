@@ -17,7 +17,7 @@ Cool Cart is a modern e-commerce application built with React, Styled Components
   - Utilizes local storage to persist the user's shopping cart across sessions.
   
 - **Responsive Design**
-  - Implements a responsive UI using Styled Components for a consistent experience across devices.
+  - Implements a responsive UI using Styled Components.
   
 - **Error Handling**
   - Provides robust error handling for scenarios like failed product fetches.
