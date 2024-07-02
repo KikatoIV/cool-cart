@@ -1,11 +1,10 @@
 import React from "react";
 import { AppProps } from "next/app";
-import { ThemeProvider } from "../contexts/ThemeContext";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
   );
-}
+};
+
+export default App;

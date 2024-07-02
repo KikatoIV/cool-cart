@@ -7,7 +7,7 @@ import {
   CartItem,
   TotalPrice,
   QuantityControl,
-} from "src/styles/cartStyles";
+} from "../styles/cartStyles";
 
 interface CartProps {
   cart: ProductItem[];
@@ -30,13 +30,15 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
         cart.map((product) => (
           <CartItem key={product.id}>
             <img src={product.thumbnail} alt={product.title} />
-            <h3>{product.title}</h3>
-            <QuantityControl>
-              <h4>Sub total {(product.price * product.quantity).toFixed(2)}</h4>
-              <button onClick={() => onRemove(product)}>-</button>
-              <span>{product.quantity}</span>
-              <button onClick={() => onAdd(product)}>+</button>
-            </QuantityControl>
+              <h3>{product.title}</h3>
+              <QuantityControl>
+                <h4>
+                  Subtotal: £{(product.price * product.quantity).toFixed(2)}
+                </h4>
+                <button onClick={() => onRemove(product)}>-</button>
+                <span>{product.quantity}</span>
+                <button onClick={() => onAdd(product)}>+</button>
+              </QuantityControl>
           </CartItem>
         ))
       )}

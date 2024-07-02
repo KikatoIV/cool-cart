@@ -2,44 +2,55 @@ import React, { useEffect, useState } from "react";
 import { ProductItem } from "../types/productItem";
 import ProductGrid from "../components/ProductGrid";
 import Cart from "../components/Cart";
-import { Container, ErrorMessage, Title } from "src/styles/indexStyles";
+import { Container, ErrorMessage, Title } from "../styles/indexStyles";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [cart, setCart] = useState<ProductItem[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch("https://dummyjson.com/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
         const data = await response.json();
-        setProducts(() => {
-          const products = data.products.map((product: ProductItem) => ({
-            ...product,
-            quantity: 0,
-          }));
-          return products;
-        });
+        const initialProducts = data.products.map((product: ProductItem) => ({
+          ...product,
+          quantity: 0,
+        }));
+        setProducts(initialProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
         setError("Failed to fetch products. Please try again later.");
       }
     };
-  
+
     fetchProducts();
   }, []);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      try {
+        const parsedCart = JSON.parse(savedCart);
+        setCart(parsedCart);
+      } catch (error) {
+        console.error("Error parsing cart from localStorage:", error);
+        setError("Failed to load cart from storage.");
+      }
     }
   }, []);
 
   const saveCartToLocalStorage = (updatedCart: ProductItem[]) => {
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    try {
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } catch (error) {
+      console.error("Error saving cart to localStorage:", error);
+      setError("Failed to save cart changes.");
+    }
   };
 
   const addToCart = (product: ProductItem) => {
@@ -73,7 +84,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Title>Cool Cart!!</Title>
+      <Title>Cool Cart</Title>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <Container>
         <ProductGrid products={products} onAddToCart={addToCart} />

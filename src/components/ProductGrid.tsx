@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useCallback } from "react";
 import { ProductItem } from "../types/productItem";
 import { GridContainer } from "../styles/productGridStyles";
 import Product from "./Product";
@@ -9,25 +9,16 @@ interface ProductGridProps {
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const scrollPosition = useRef<number>(0);
-
-  useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.scrollTop = scrollPosition.current;
-    }
-  }, [products]);
-
-  const handleAddToCart = (product: ProductItem) => {
-    console.log(gridRef.current)
-    if (gridRef.current) {
-      scrollPosition.current = gridRef.current.scrollTop;
-    }
+  const handleAddToCart = useCallback((product: ProductItem) => {
     onAddToCart(product);
-  };
+  }, [onAddToCart]);
+
+  if (products.length === 0) {
+    return <p>No products available.</p>;
+  }
 
   return (
-    <GridContainer ref={gridRef}>
+    <GridContainer>
       {products.map((product) => (
         <Product
           key={product.id}
@@ -39,4 +30,4 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
   );
 };
 
-export default ProductGrid;
+export default React.memo(ProductGrid);

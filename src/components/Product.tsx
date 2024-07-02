@@ -1,6 +1,12 @@
 import React from "react";
 import { ProductItem } from "../types/productItem";
-import { AddToCartButton, ProductContainer, ProductImage, ProductPrice, ProductTitle } from "src/styles/productStyles";
+import {
+  AddToCartButton,
+  ProductContainer,
+  ProductImage,
+  ProductPrice,
+  ProductTitle,
+} from "../styles/productStyles";
 
 interface ProductProps {
   product: ProductItem;
@@ -8,11 +14,13 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ product, onAddToCart }) => {
+  const { title, thumbnail, price } = product;
+
   return (
     <ProductContainer>
-      <ProductImage src={product.thumbnail} alt={product.title} />
-      <ProductTitle>{product.title}</ProductTitle>
-      <ProductPrice>For just £{product.price}</ProductPrice>
+      <ProductImage src={thumbnail} alt={title} />
+      <ProductTitle>{title}</ProductTitle>
+      <ProductPrice>For just £{price}</ProductPrice>
       <AddToCartButton onClick={() => onAddToCart(product)}>
         Add to Cart
       </AddToCartButton>
