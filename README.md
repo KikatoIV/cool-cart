@@ -5,6 +5,8 @@
 
 Cool Cart is a modern e-commerce application built with React, Styled Components, TypeScript, and Next.js. It provides a seamless shopping experience with features for browsing products, managing a shopping cart, and handling errors gracefully.
 
+![image](https://github.com/KikatoIV/cool-cart/assets/39209669/33749af2-c1fc-4169-a78d-899722552215)
+
 ## Features
 
 - **Product Management**
