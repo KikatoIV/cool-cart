@@ -1,11 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 import { SearchContainer, SearchInput } from "src/styles/searchBarStyles";
-
-
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-}
+import { SearchBarProps } from "src/types/searchBarProps";
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState<string>("");

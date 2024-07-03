@@ -1,5 +1,4 @@
 import React from "react";
-import { ProductItem } from "../types/productItem";
 import {
   AddToCartButton,
   ProductContainer,
@@ -7,11 +6,7 @@ import {
   ProductPrice,
   ProductTitle,
 } from "../styles/productStyles";
-
-interface ProductProps {
-  product: ProductItem;
-  onAddToCart: (product: ProductItem) => void;
-}
+import { ProductProps } from "src/types/productProps";
 
 const Product: React.FC<ProductProps> = ({ product, onAddToCart }) => {
   const { title, thumbnail, price } = product;

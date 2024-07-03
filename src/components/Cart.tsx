@@ -1,5 +1,4 @@
 import React from "react";
-import { ProductItem } from "../types/productItem";
 import {
   CartContainer,
   CartTitle,
@@ -8,12 +7,7 @@ import {
   TotalPrice,
   QuantityControl,
 } from "../styles/cartStyles";
-
-interface CartProps {
-  cart: ProductItem[];
-  onAdd: (product: ProductItem) => void;
-  onRemove: (product: ProductItem) => void;
-}
+import { CartProps } from "src/types/cartProps";
 
 const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
   const totalPrice = cart.reduce(
@@ -30,15 +24,15 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
         cart.map((product) => (
           <CartItem key={product.id}>
             <img src={product.thumbnail} alt={product.title} />
-              <h3>{product.title}</h3>
-              <QuantityControl>
-                <h4>
-                  Subtotal: £{(product.price * product.quantity).toFixed(2)}
-                </h4>
-                <button onClick={() => onRemove(product)}>-</button>
-                <span>{product.quantity}</span>
-                <button onClick={() => onAdd(product)}>+</button>
-              </QuantityControl>
+            <h3>{product.title}</h3>
+            <QuantityControl>
+              <h4>
+                Subtotal: £{(product.price * product.quantity).toFixed(2)}
+              </h4>
+              <button onClick={() => onRemove(product)}>-</button>
+              <span>{product.quantity}</span>
+              <button onClick={() => onAdd(product)}>+</button>
+            </QuantityControl>
           </CartItem>
         ))
       )}

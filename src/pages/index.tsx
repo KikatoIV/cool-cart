@@ -61,7 +61,9 @@ const Home: React.FC = () => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {
         const updatedCart = prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
         saveCartToLocalStorage(updatedCart);
         return updatedCart;
@@ -77,7 +79,9 @@ const Home: React.FC = () => {
     setCart((prevCart) => {
       const updatedCart = prevCart
         .map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         )
         .filter((item) => item.quantity > 0);
       saveCartToLocalStorage(updatedCart);
