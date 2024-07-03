@@ -20,7 +20,7 @@ export const ProductContainer = styled.div`
   padding: 0.75rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 20rem;
+  max-width: 22rem;
   margin-top: 0.75rem;
 `;
 

@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const GridContainer = styled.div`
-  border: 1px solid #eee;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  padding: 16px;
-  max-height: 500px;
-  overflow-y: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 16px;
+    max-height: 600px;
+    overflow-y: auto;
+    width: fit-content;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: auto;
 
   @media (min-width: 1024px) {
     display: grid;
