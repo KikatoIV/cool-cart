@@ -57,7 +57,8 @@ export const QuantityControl = styled.div`
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     cursor: pointer;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 
   span {

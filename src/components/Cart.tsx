@@ -30,7 +30,7 @@ const Cart: React.FC<CartProps> = ({ cart, onAdd, onRemove }) => {
                 Subtotal: £{(product.price * product.quantity).toFixed(2)}
               </h4>
               <button onClick={() => onRemove(product)}>-</button>
-              <span>{product.quantity}</span>
+              <div>{product.quantity}</div>
               <button onClick={() => onAdd(product)}>+</button>
             </QuantityControl>
           </CartItem>
