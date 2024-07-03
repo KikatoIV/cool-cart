@@ -31,7 +31,18 @@ Cool Cart is a modern e-commerce application built with React, Styled Components
   
 - **Framework:**
   - Next.js
-  
+
+## Code Snippets
+This code saves the cart to localStorage by converting the cart array to a JSON string.
+
+  ![image](https://github.com/KikatoIV/cool-cart/assets/39209669/332baa56-3d08-4807-86cc-3bd18f468424)
+
+This is the searchbar it makes use of debounce which should delay users from typing for about 300ms.
+
+  ![image](https://github.com/KikatoIV/cool-cart/assets/39209669/8b0a003b-c1d2-43b5-ba4a-8e5db9f54ebb)
+
+
+
 ## Getting Started
 
 ### Installation
