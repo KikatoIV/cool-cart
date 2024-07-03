@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ProductItem } from "../types/productItem";
 import ProductGrid from "../components/ProductGrid";
 import Cart from "../components/Cart";
+import SearchBar from "../components/SearchBar";
 import { Container, ErrorMessage, Title } from "../styles/indexStyles";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductItem[]>([]);
   const [cart, setCart] = useState<ProductItem[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,6 +24,7 @@ const Home: React.FC = () => {
           quantity: 0,
         }));
         setProducts(initialProducts);
+        setFilteredProducts(initialProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
         setError("Failed to fetch products. Please try again later.");
@@ -54,7 +57,7 @@ const Home: React.FC = () => {
   };
 
   const addToCart = (product: ProductItem) => {
-    setCart(prevCart => {
+    setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {
         const updatedCart = prevCart.map((item) =>
@@ -82,12 +85,24 @@ const Home: React.FC = () => {
     });
   };
 
+  const handleSearch = (query: string) => {
+    if (query === "") {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    }
+  };
+
   return (
     <>
       <Title>Cool Cart</Title>
+      <SearchBar onSearch={handleSearch} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <Container>
-        <ProductGrid products={products} onAddToCart={addToCart} />
+        <ProductGrid products={filteredProducts} onAddToCart={addToCart} />
         <Cart cart={cart} onAdd={addToCart} onRemove={removeFromCart} />
       </Container>
     </>
